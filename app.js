@@ -166,9 +166,9 @@ const Views = {
   displayResultMessage: function(result) {
     let message = '';
     if (result === 'O') {
-      message = 'O wins!';
+      message = `${Game.players.registered ? Game.players.O : Game.turn} wins!`;
     } else if (result === 'X') {
-      message = 'X wins!';
+      message = `${Game.players.registered ? Game.players.X : Game.turn} wins!`;
     } else {
       message = 'It\'s a draw.';
     }
