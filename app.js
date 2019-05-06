@@ -29,12 +29,12 @@ let Game = {
       console.log(Game.lastMove);
       Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
       console.log(Game.board);
-      Game.switchTurn();
       Game.checkForEndConditions((none, result) => {
+        Game.switchTurn();
         console.log('here');
         console.log(Game.turn);
+        Views.refreshBoard();
         if (none) {
-          Views.refreshBoard();
           return;
         }
         Views.displayResultMessage(result);
@@ -52,13 +52,13 @@ let Game = {
     callback(true);
   },
   checkForRowVictory: function() {
-    // for (var i = 0; i < Game.board.length; i++) {
-    //   if (Game.board[i][0] === Game.turn && Game.board[i][1] === Game.turn && Game.board[i][2] === Game.turn) {
-    //     console.log('row victory');
-    //     return true;
-    //   }
-    // }
-    // return false;
+    for (var i = 0; i < Game.board.length; i++) {
+      if (Game.board[i][0] === Game.turn && Game.board[i][1] === Game.turn && Game.board[i][2] === Game.turn) {
+        console.log('row victory');
+        return true;
+      }
+    }
+    return false;
   },
   checkForColumnVictory: function() {
     // for (var i = 0; i < Game.board.length; i++) {
