@@ -26,13 +26,9 @@ let Game = {
       return;
     } else {
       Game.lastMove = [tileLocation[0], tileLocation[1]];
-      console.log(Game.lastMove);
       Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
-      console.log(Game.board);
       Game.checkForEndConditions((none, result) => {
         Game.switchTurn();
-        console.log('here');
-        console.log(Game.turn);
         Views.refreshBoard();
         if (none) {
           return;
