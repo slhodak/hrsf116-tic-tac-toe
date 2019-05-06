@@ -18,16 +18,22 @@ let Game = {
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
-  updateBoard: function(tileClicked) {
+  updateBoard: function(tileLocation) {
     //  change value in board model depending on span clicked
-    Game.checkForEndConditions((none, result) => {
-      if (none) {
-        refreshBoard();
-        return;
-      }
-      
-      Views.displayResultMessage(result);
-    });
+    if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
+      return;
+    } else {
+      Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
+      console.log(Game.board);
+      Game.switchTurn();
+      Game.checkForEndConditions((none, result) => {
+        if (none) {
+          refreshBoard();
+          return;
+        }
+        Views.displayResultMessage(result);
+      });
+    }
   },
   checkForEndConditions: function(callback) {
     // check board for end conditions
