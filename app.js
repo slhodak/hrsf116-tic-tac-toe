@@ -12,6 +12,10 @@ resetButton.addEventListener('click', (e) => {
 
 // Models
 const Game = {
+  players: {
+    X: '',
+    O: ''
+  },
   record: [],
   over: false,
   board : [
