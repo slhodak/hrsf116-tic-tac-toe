@@ -59,7 +59,10 @@ let Game = {
 // Views
 const Views = {
   refreshBoard: function() {
-
+    let tiles = document.getElementsByClassName('tile');
+    Array.from(tiles).forEach(tile => {
+      let tileXY = parseTileCoordinates(tile);
+    });
   },
   displayResultMessage: function(result) {
     let message = '';
@@ -76,9 +79,14 @@ const Views = {
 
 // Controllers
 let handleTileClick = function(target) {
-  // Game.turn === 'O' ? target.innerText = '_O_' : target.innerText = '_X_';
-  let tileCoordinates = target.id.split('_')[1].split('');
-  tileCoordinates = tileCoordinates.map(coord => parseInt(coord));
+  let tileCoordinates = HelperFunctions.parseTileCoordinates(target);
   Game.updateBoard(tileCoordinates);
   Game.switchTurn();
 };
+
+const HelperFunctions = {
+  parseTileCoordinates: function(tileNode) {
+    let tileCoordinates = tileNode.id.split('_')[1].split('');
+    return tileCoordinates.map(coord => parseInt(coord));
+  }
+}
