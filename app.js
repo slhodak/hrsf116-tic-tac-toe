@@ -9,6 +9,10 @@ let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', (e) => {
   Game.resetGame();
 });
+// let registerPlayersButton = document.getElementById('showPlayers');
+// registerPlayersButton.addEventListener('click', (e) => {
+//   // document.getElementById('');
+// })
 
 // Models
 const Game = {
@@ -198,7 +202,7 @@ const tests = {
     testDraw();
   },
   testDraw: function() {
-    console.log('should declare a draw and register draw as winner in record table');
+    console.log('should register draw as winner in record table');
     Game.board = [
       ['X', 'X', 'O'],
       ['O', 'O', 'X'],
@@ -207,11 +211,11 @@ const tests = {
     let lastTile = document.getElementById('tile_22');
     Controllers.handleTileClick(lastTile);
     let expected = 'draw';
-    let result = document.getElementById('record').children[0].children[1];
+    let result = document.getElementById('record').children[0].children[1].innerText;
     if (result === expected) {
       console.log(`successfully registers no winner in draw`);
     } else {
-      console.log(`expected ${result.innerText} to equal ${expected}`);
+      console.log(`expected ${result} to equal ${expected}`);
     }
   }
 }
