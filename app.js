@@ -9,10 +9,15 @@ let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', (e) => {
   Game.resetGame();
 });
-// let registerPlayersButton = document.getElementById('showPlayers');
-// registerPlayersButton.addEventListener('click', (e) => {
-//   // document.getElementById('');
-// })
+let showFormButton = document.getElementById('showPlayersForm');
+showFormButton.addEventListener('click', (e) => {
+  let form = document.getElementById('setPlayerX');
+  form.hidden = !form.hidden;
+});
+let playerXForm = document.getElementById('setPlayerX');
+playerXForm.addEventListener('submit', (e) => {
+  Game.setPlayers(e.target[0].value);
+});
 
 // Models
 const Game = {
@@ -29,6 +34,9 @@ const Game = {
     ],
   turn: 'X',
   lastMove: [],
+  setPlayers: function(playerX) {
+    Game.players.X = playerX;
+  },
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },

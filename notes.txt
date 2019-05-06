@@ -42,3 +42,6 @@ Choices
 Bug:
 - Game returns undefined for last winner if no winner
 - no draw result message
+
+Studies
+- look into data attributes
