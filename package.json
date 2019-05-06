@@ -2,9 +2,9 @@
   "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "simple tic tac toe game",
-  "main": "app.js",
+  "main": "/server/server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon ./server/server.js"
   },
   "repository": {
     "type": "git",
