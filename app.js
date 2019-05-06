@@ -24,7 +24,7 @@ const Game = {
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
-  updateBoard: function(tileLocation) {
+  processTurn: function(tileLocation) {
     if (Game.over) {
       return;
     }
@@ -38,7 +38,7 @@ const Game = {
         if (result) {
           Views.displayResultMessage(result);
           Game.over = true;
-          Game.record.push(Game.turn);
+          Game.record.push(result);
           Views.addRecordRow();
           return;
         }
@@ -48,11 +48,30 @@ const Game = {
     }
   },
   checkForEndConditions: function(callback) {
-    if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
+    if (Game.checkForFullBoard()) {
+      callback('draw');
+      return;
+    } else if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
       callback(Game.turn);
       return;
     }
     callback();
+  },
+  checkForFullBoard: function() {
+    let emptySpaceFound = false;
+    for (var i = 0; i < Game.board.length; i++) {
+      if (emptySpaceFound) {
+        break;
+      }
+      for (var j = 0; j < Game.board.length; j++) {
+        if (!Game.board[i][j]) {
+          emptySpaceFound = true;
+          break;
+        }
+      }
+    }
+    console.log('found empty space: ', emptySpaceFound);
+    return !emptySpaceFound;
   },
   checkForRowVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
@@ -80,13 +99,23 @@ const Game = {
     }
     return false;
   },
+  getLastWinner: function() {
+    if (Game.record.length) {
+      for (var i = 0; i < Game.record.length; i++) {
+        if (Game.record[i] !== 'draw') {
+          return Game.record[i];
+        }
+      }
+    }
+    return 'X';
+  },
   resetGame: function() {
     Game.board.forEach(row => {
       for (var i = 0; i < Game.board.length; i++) {
         row[i] = null;
       }
     });
-    Game.turn = Game.record[Game.record.length - 1];
+    Game.turn = Game.getLastWinner();
     Game.over = false;
     Views.displayCurrentTurn();
     Views.clearBoard();
@@ -136,7 +165,7 @@ const Views = {
     winner.style.border = '1px solid black';
     let now = new Date();
     time.innerText = `${now.getMonth()}/${now.getDate()}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    winner.innerText = Game.turn;
+    winner.innerText = Game.getLastWinner();
     row.append(time);
     row.append(winner);
     Views.getRecordTable().append(row);
@@ -146,7 +175,7 @@ const Views = {
 // Controllers
 let handleTileClick = function(target) {
   let tileCoordinates = HelperFunctions.parseTileCoordinates(target);
-  Game.updateBoard(tileCoordinates);
+  Game.processTurn(tileCoordinates);
 };
 
 const HelperFunctions = {
@@ -157,3 +186,16 @@ const HelperFunctions = {
 }
 
 Views.displayCurrentTurn();
+
+
+//  Test Suite
+const tests = {
+  testDraw: function() {
+    Game.board = [
+      ['X', 'X', 'O'],
+      ['O', 'O', 'X'],
+      ['X', 'O', 'X']
+    ];
+    Game.processTurn();
+  }
+}
