@@ -10,15 +10,17 @@
 <body>
   <h1>Tic - Tac - Toe</h1>
   <!-- turns flipper -->
-  <button id="showPlayersForm">Register Players</button>
-  <form action="#" id="setPlayerX" hidden="true">
-    <label>Who is X?</label>
-    <input type="text" placeholder="name"></input><br>
-    <label>Who is O?</label>
-    <input type="text" placeholder="name"></input>
-    <input type="submit"></input>
-  </form>
-  <h2>Turn: <span id="currentTurn"></span></h2>
+  <div id="playersForm">
+    <button id="showPlayersForm">Register Players</button>
+    <form action="#" id="setPlayerX" hidden="true">
+      <label>Who is X?</label>
+      <input type="text" placeholder="name"></input><br>
+      <label>Who is O?</label>
+      <input type="text" placeholder="name"></input>
+      <input type="submit"></input>
+    </form>
+  </div>
+  <h2 id="turn">Turn: <span id="currentTurn"></span></h2>
   <!-- board -->
   <div id="board">
     <div class="row">
@@ -34,7 +36,7 @@
   <!-- result message on game end -->
   <h3 id="resultMessage"></h3>
   <button id="reset">New Game</button>
-  <div>
+  <div id="record">
     <h2>Record</h2>
     <table id="record">
     </table>

@@ -2,8 +2,45 @@ html {
   background-color: aquamarine;
 }
 
-/* body {
+body {
   display: grid;
-  grid-template-areas: repeat(10, 1fr) / repeat(10, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-areas: 
+    "topLeft  topLeft  title  title  topRight  topRight"
+    "regPlay  regPlay  turns  turns  record    record "
+    "regPlay  regPlay  board  board  record    record "
+    "reset    reset    board  board  record    record "
+    "botLeft  botLeft  result  result  botRight  botRight"
+    "lFooter  lFooter  mFoot  mFoot  rFooter  rFooter"
+  ;
 }
- */
+
+#playersForm {
+  grid-area: regPlay;
+}
+
+#turn {
+  grid-area: turns;
+}
+
+#board {
+  grid-area: board;
+}
+
+#record {
+  grid-area: record;
+}
+
+#resultMessage {
+  grid-area: result;
+}
+
+
+#reset {
+  grid-area: reset;
+  align-self: center;
+  justify-self: center;
+  height: 50%;
+  width: 50%;
+}
