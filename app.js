@@ -2,7 +2,7 @@
 let tiles = document.getElementsByClassName('tile');
 Array.from(tiles).forEach(element => {
   element.addEventListener('click', (e) => {
-    handleTileClick(e.target);
+    Controllers.handleTileClick(e.target);
   });
 });
 let resetButton = document.getElementById('reset');
@@ -173,9 +173,11 @@ const Views = {
 }
 
 // Controllers
-let handleTileClick = function(target) {
-  let tileCoordinates = HelperFunctions.parseTileCoordinates(target);
-  Game.processTurn(tileCoordinates);
+const Controllers = {
+  handleTileClick: function(target) {
+    let tileCoordinates = HelperFunctions.parseTileCoordinates(target);
+    Game.processTurn(tileCoordinates);
+  }
 };
 
 const HelperFunctions = {
@@ -190,12 +192,24 @@ Views.displayCurrentTurn();
 
 //  Test Suite
 const tests = {
+  runAllTests: function() {
+    testDraw();
+  },
   testDraw: function() {
+    console.log('should declare a draw and register draw as winner in record table');
     Game.board = [
       ['X', 'X', 'O'],
       ['O', 'O', 'X'],
-      ['X', 'O', 'X']
+      ['X', 'O', null]
     ];
-    Game.processTurn();
+    let lastTile = document.getElementById('tile_22');
+    Controllers.handleTileClick(lastTile);
+    let expected = 'draw';
+    let result = document.getElementById('record').children[0].children[1];
+    if (result === expected) {
+      console.log(`successfully registers no winner in draw`);
+    } else {
+      console.log(`expected ${result.innerText} to equal ${expected}`);
+    }
   }
 }
