@@ -29,7 +29,6 @@ const Game = {
       return;
     }
     if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
-      console.log('no continue', Game.turn);
       return;
     } else {
       Game.lastMove = [tileLocation[0], tileLocation[1]];
@@ -40,7 +39,6 @@ const Game = {
           Views.displayResultMessage(result);
           Game.over = true;
           Game.record.push(Game.turn);
-          //  add record row
           Views.addRecordRow();
           return;
         }
@@ -59,7 +57,6 @@ const Game = {
   checkForRowVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
       if (Game.board[i][0] === Game.turn && Game.board[i][1] === Game.turn && Game.board[i][2] === Game.turn) {
-        console.log('row victory');
         return true;
       }
     }
@@ -68,7 +65,6 @@ const Game = {
   checkForColumnVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
       if (Game.board[0][i] === Game.turn && Game.board[1][i] === Game.turn && Game.board[2][i] === Game.turn) {
-        console.log('column victory');
         return true;
       }
     }
@@ -107,10 +103,13 @@ const Views = {
     Array.from(document.getElementsByClassName('tile')).forEach(tile => {
       tile.innerText = '___';
     });
+    Views.clearWinnerDisplay();
+  },
+  clearWinnerDisplay: function() {
+    document.getElementById('resultMessage').innerText = '';
   },
   refreshBoard: function() {
     let tile = document.getElementById('tile_' + Game.lastMove[0].toString() + Game.lastMove[1].toString());
-    console.log(tile);
     tile.innerText = `_${Game.turn}_`;
   },
   displayResultMessage: function(result) {
