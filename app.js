@@ -18,24 +18,19 @@ let Game = {
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
-  updateBoard: function() {
-    checkForEndConditions((none, result) => {
+  updateBoard: function(tileClicked) {
+    //  change value in board model depending on span clicked
+    Game.checkForEndConditions((none, result) => {
       if (none) {
         refreshBoard();
         return;
       }
       
-      if (result === 'o') {
-        displayResultMessage('O wins!');
-      } else if (result === 'x') {
-        displayResultMessage('X wins!');
-      } else {
-        displayResultMessage('It\'s a draw.');
-      }
+      Views.displayResultMessage(result);
     });
   },
   checkForEndConditions: function(callback) {
-    // check for end conditions
+    // check board for end conditions
     callback(null, result);
     
     // if no end conditions
@@ -44,18 +39,27 @@ let Game = {
 }
 
 // Views
-let refreshBoard = function() {
-
-};
-
-let displayResultMessage = function(message) {
-  
-};
-
+const Views = {
+  refreshBoard: function() {
+  },
+  displayResultMessage: function(result) {
+    let message = '';
+    if (result === 'o') {
+      message = 'O wins!';
+    } else if (result === 'x') {
+      message = 'X wins!';
+    } else {
+      message = 'It\'s a draw.';
+    }
+    // render message to the DOM
+  }
+}
 
 // Controllers
 let handleTileClick = function(target) {
   // Game.turn === 'O' ? target.innerText = '_O_' : target.innerText = '_X_';
-
+  let tileCoordinates = target.id.split('_')[1].split('');
+  tileCoordinates = tileCoordinates.map(coord => parseInt(coord));
+  Game.updateBoard(tileCoordinates);
   Game.switchTurn();
 };
