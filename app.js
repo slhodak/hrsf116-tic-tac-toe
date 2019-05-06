@@ -37,10 +37,22 @@ let Game = {
   },
   checkForEndConditions: function(callback) {
     // check board for end conditions
-    callback(null, result);
+    if (checkForRowVictory() || checkForColumnVictory() || checkForDiagonalVictory()) {
+      callback(null, Game.turn);
+      return;
+    }
     
     // if no end conditions
     callback(true);
+  },
+  checkForRowVictory: function() {
+
+  },
+  checkForColumnVictory: function() {
+
+  },
+  checkForDiagonalVictory: function() {
+
   }
 }
 
