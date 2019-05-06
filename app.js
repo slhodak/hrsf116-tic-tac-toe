@@ -19,7 +19,6 @@ let Game = {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
   updateBoard: function() {
-
     checkForEndConditions((none, result) => {
       if (none) {
         refreshBoard();
@@ -35,8 +34,12 @@ let Game = {
       }
     });
   },
-  checkForEndConditions: function() {
-
+  checkForEndConditions: function(callback) {
+    // check for end conditions
+    callback(null, result);
+    
+    // if no end conditions
+    callback(true);
   }
 }
 
