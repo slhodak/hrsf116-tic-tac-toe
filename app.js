@@ -18,7 +18,7 @@ const Game = {
       [null, null, null],
       [null, null, null]
     ],
-  turn: 'O',
+  turn: 'X',
   lastMove: [],
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
@@ -37,6 +37,7 @@ const Game = {
           return;
         }
         Game.switchTurn();
+        Views.displayCurrentTurn();
       });
     }
   },
@@ -81,12 +82,18 @@ const Game = {
         row[i] = null;
       }
     });
+    Game.turn = 'X';
+    Views.displayCurrentTurn();
     Views.clearBoard();
   }
 }
 
 // Views
 const Views = {
+  displayCurrentTurn: function() {
+    const turnDisplay = document.getElementById('currentTurn');
+    turnDisplay.innerText = Game.turn;
+  },
   clearBoard: function() {
     Array.from(document.getElementsByClassName('tile')).forEach(tile => {
       tile.innerText = '___';
