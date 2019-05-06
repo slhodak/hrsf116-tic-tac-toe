@@ -31,7 +31,7 @@ let Game = {
       Game.switchTurn();
       Game.checkForEndConditions((none, result) => {
         if (none) {
-          refreshBoard();
+          Views.refreshBoard();
           return;
         }
         Views.displayResultMessage(result);
@@ -40,7 +40,7 @@ let Game = {
   },
   checkForEndConditions: function(callback) {
     // check board for end conditions
-    if (checkForRowVictory() || checkForColumnVictory() || checkForDiagonalVictory()) {
+    if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
       callback(null, Game.turn);
       return;
     }
@@ -49,20 +49,19 @@ let Game = {
     callback(true);
   },
   checkForRowVictory: function() {
-
   },
   checkForColumnVictory: function() {
-
   },
   checkForDiagonalVictory: function() {
-
   }
 }
 
 // Views
 const Views = {
   refreshBoard: function() {
-    
+    let tile = document.getElementById('tile_' + Game.lastMove[0].toString() + Game.lastMove[1].toString());
+    console.log(tile);
+    tile.innerText = `_${Game.turn}_`;
   },
   displayResultMessage: function(result) {
     let message = '';
