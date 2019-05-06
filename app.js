@@ -12,6 +12,7 @@ resetButton.addEventListener('click', (e) => {
 
 // Models
 const Game = {
+  over: false,
   board : [
       [null, null, null],
       [null, null, null],
@@ -23,6 +24,9 @@ const Game = {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
   updateBoard: function(tileLocation) {
+    if (Game.over) {
+      return;
+    }
     if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
       console.log('no continue', Game.turn);
       return;
@@ -33,6 +37,7 @@ const Game = {
         Views.refreshBoard();
         if (result) {
           Views.displayResultMessage(result);
+          Game.over = true;
           return;
         }
         Game.switchTurn();
@@ -82,6 +87,7 @@ const Game = {
       }
     });
     Game.turn = 'X';
+    Game.over = false;
     Views.displayCurrentTurn();
     Views.clearBoard();
   }
