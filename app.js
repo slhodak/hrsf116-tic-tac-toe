@@ -69,11 +69,11 @@ const Game = {
     }
   },
   checkForEndConditions: function(callback) {
-    if (Game.checkForFullBoard()) {
-      callback('draw');
-      return;
-    } else if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
+    if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
       callback(Game.turn);
+      return;
+    } else if (Game.checkForFullBoard()) {
+      callback('draw');
       return;
     }
     callback();
@@ -165,7 +165,7 @@ const Views = {
   },
   displayResultMessage: function(result) {
     let message = '';
-    if (result === 'X' || 'O') {
+    if (result === 'X' || result === 'O') {
       message = `${Game.players.registered ? Game.players[result] : Game.turn} wins!`;
     } else {
       message = 'It\'s a draw.';
@@ -185,7 +185,7 @@ const Views = {
     winner.style.border = '1px solid black';
     let now = new Date();
     time.innerText = `${now.getMonth()}/${now.getDate()}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    winner.innerText = Game.record[Game.record.length - 1];
+    winner.innerText = Game.players.registered ? `${Game.players[Game.turn]}(${Game.turn})` : Game.record[Game.record.length - 1];
     row.append(time);
     row.append(winner);
     Views.getRecordTable().append(row);
@@ -215,6 +215,7 @@ Views.displayCurrentTurn();
 const tests = {
   runAllTests: function() {
     testDraw();
+    testWinner();
   },
   testDraw: function() {
     console.log('should register draw as winner in record table');
@@ -229,6 +230,29 @@ const tests = {
     let result = document.getElementById('record').children[0].children[1].innerText;
     if (result === expected) {
       console.log(`successfully registers no winner in draw`);
+    } else {
+      console.log(`expected ${result} to equal ${expected}`);
+    }
+  },
+  testWinner: function() {
+    console.log('should register name as winner in record table');
+    Game.board = [
+      ['X', 'X', 'O'],
+      [null, 'O', 'O'],
+      ['X', 'O', 'X']
+    ];
+    let lastTile = document.getElementById('tile_10');
+    Game.over = false;
+    Game.players = {
+      registered: true,
+      X: 'Martin',
+      O: 'Lawrence'
+    };
+    Controllers.handleTileClick(lastTile);
+    let expected = 'Martin';
+    let result = document.getElementById('record').children[0].children[1].innerText;
+    if (result === expected) {
+      console.log(`successfully records winner's name`);
     } else {
       console.log(`expected ${result} to equal ${expected}`);
     }
