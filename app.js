@@ -90,12 +90,10 @@ const Game = {
     return false;
   },
   checkForDiagonalVictory: function() {
-    for (var i = 0; i < Game.board.length; i++) {
-      if (Game.board[0][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[2][2] === Game.turn) {
-        return true;
-      } else if (Game.board[2][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[0][2] === Game.turn) {
-        return true;
-      }
+    if (Game.board[0][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[2][2] === Game.turn) {
+      return true;
+    } else if (Game.board[2][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[0][2] === Game.turn) {
+      return true;
     }
     return false;
   },
@@ -180,6 +178,7 @@ const Controllers = {
   }
 };
 
+// Helper Functions
 const HelperFunctions = {
   parseTileCoordinates: function(tileNode) {
     let tileCoordinates = tileNode.id.split('_')[1].split('');
