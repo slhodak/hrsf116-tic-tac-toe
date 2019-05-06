@@ -10,7 +10,6 @@ resetButton.addEventListener('click', (e) => {
   Game.resetGame();
 });
 
-
 // Models
 const Game = {
   board : [
@@ -130,3 +129,5 @@ const HelperFunctions = {
     return tileCoordinates.map(coord => parseInt(coord));
   }
 }
+
+Views.displayCurrentTurn();
