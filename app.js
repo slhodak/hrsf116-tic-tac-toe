@@ -22,6 +22,7 @@ let Game = {
   updateBoard: function(tileLocation) {
     //  change value in board model depending on span clicked
     if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
+      console.log('no continue', Game.turn);
       return;
     } else {
       Game.lastMove = [tileLocation[0], tileLocation[1]];
@@ -30,6 +31,8 @@ let Game = {
       console.log(Game.board);
       Game.switchTurn();
       Game.checkForEndConditions((none, result) => {
+        console.log('here');
+        console.log(Game.turn);
         if (none) {
           Views.refreshBoard();
           return;
@@ -49,10 +52,30 @@ let Game = {
     callback(true);
   },
   checkForRowVictory: function() {
+    // for (var i = 0; i < Game.board.length; i++) {
+    //   if (Game.board[i][0] === Game.turn && Game.board[i][1] === Game.turn && Game.board[i][2] === Game.turn) {
+    //     console.log('row victory');
+    //     return true;
+    //   }
+    // }
+    // return false;
   },
   checkForColumnVictory: function() {
+    // for (var i = 0; i < Game.board.length; i++) {
+    //   if (Game.board[0][i] && Game.board[1][i] && Game.board[2][i]) {
+    //     console.log('column victory');
+    //     return true;
+    //   }
+    // }
+    // return false;
   },
   checkForDiagonalVictory: function() {
+    // for (var i = 0; i < Game.board.length; i++) {
+    //   if (Game.board[0] && Game.board[1] && Game.board[2]) {
+    //     return true;
+    //   }
+    // }
+    // return false;
   }
 }
 
@@ -80,7 +103,6 @@ const Views = {
 let handleTileClick = function(target) {
   let tileCoordinates = HelperFunctions.parseTileCoordinates(target);
   Game.updateBoard(tileCoordinates);
-  Game.switchTurn();
 };
 
 const HelperFunctions = {
