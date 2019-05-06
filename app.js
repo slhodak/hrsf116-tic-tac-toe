@@ -57,13 +57,13 @@ let Game = {
     return false;
   },
   checkForColumnVictory: function() {
-    // for (var i = 0; i < Game.board.length; i++) {
-    //   if (Game.board[0][i] && Game.board[1][i] && Game.board[2][i]) {
-    //     console.log('column victory');
-    //     return true;
-    //   }
-    // }
-    // return false;
+    for (var i = 0; i < Game.board.length; i++) {
+      if (Game.board[0][i] && Game.board[1][i] && Game.board[2][i]) {
+        console.log('column victory');
+        return true;
+      }
+    }
+    return false;
   },
   checkForDiagonalVictory: function() {
     // for (var i = 0; i < Game.board.length; i++) {
