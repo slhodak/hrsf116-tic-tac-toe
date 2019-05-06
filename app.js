@@ -16,7 +16,8 @@ showFormButton.addEventListener('click', (e) => {
 });
 let playerXForm = document.getElementById('setPlayerX');
 playerXForm.addEventListener('submit', (e) => {
-  Game.setPlayers(e.target[0].value);
+  Game.setPlayers(e.target[0].value, e.target[1].value);
+  playerXForm.hidden = true;
 });
 
 // Models
@@ -34,8 +35,9 @@ const Game = {
     ],
   turn: 'X',
   lastMove: [],
-  setPlayers: function(playerX) {
+  setPlayers: function(playerX, playerO) {
     Game.players.X = playerX;
+    Game.players.O = playerO;
   },
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
