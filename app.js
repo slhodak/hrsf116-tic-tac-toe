@@ -5,6 +5,11 @@ Array.from(tiles).forEach(element => {
     handleTileClick(e.target);
   });
 });
+let resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', (e) => {
+  Game.resetGame();
+});
+
 
 // Models
 //    check for game end conditions
@@ -57,7 +62,7 @@ const Game = {
   },
   checkForColumnVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
-      if (Game.board[0][i] && Game.board[1][i] && Game.board[2][i]) {
+      if (Game.board[0][i] === Game.turn && Game.board[1][i] === Game.turn && Game.board[2][i] === Game.turn) {
         console.log('column victory');
         return true;
       }
@@ -66,18 +71,31 @@ const Game = {
   },
   checkForDiagonalVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
-      if (Game.board[0][1] === Game.turn && Game.board[1][1] === Game.turn && Game.board[2][1] === Game.turn) {
+      if (Game.board[0][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[2][2] === Game.turn) {
         return true;
       } else if (Game.board[2][0] === Game.turn && Game.board[1][1] === Game.turn && Game.board[0][2] === Game.turn) {
         return true;
       }
     }
     return false;
+  },
+  resetGame: function() {
+    Game.board.forEach(row => {
+      for (var i = 0; i < Game.board.length; i++) {
+        row[i] = null;
+      }
+    });
+    Views.clearBoard();
   }
 }
 
 // Views
 const Views = {
+  clearBoard: function() {
+    Array.from(document.getElementsByClassName('tile')).forEach(tile => {
+      tile.innerText = '___';
+    });
+  },
   refreshBoard: function() {
     let tile = document.getElementById('tile_' + Game.lastMove[0].toString() + Game.lastMove[1].toString());
     console.log(tile);
