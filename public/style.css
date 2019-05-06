@@ -2,7 +2,8 @@ html {
   background-color: aquamarine;
 }
 
-body {
+/* body {
   display: grid;
   grid-template-areas: repeat(10, 1fr) / repeat(10, 1fr);
 }
+ */
