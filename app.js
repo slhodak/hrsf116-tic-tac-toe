@@ -15,6 +15,7 @@ let Game = {
       [null, null, null]
     ],
   turn: 'O',
+  lastMove: [],
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
@@ -23,6 +24,8 @@ let Game = {
     if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
       return;
     } else {
+      Game.lastMove = [tileLocation[0], tileLocation[1]];
+      console.log(Game.lastMove);
       Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
       console.log(Game.board);
       Game.switchTurn();
@@ -59,10 +62,7 @@ let Game = {
 // Views
 const Views = {
   refreshBoard: function() {
-    let tiles = document.getElementsByClassName('tile');
-    Array.from(tiles).forEach(tile => {
-      let tileXY = parseTileCoordinates(tile);
-    });
+    
   },
   displayResultMessage: function(result) {
     let message = '';
