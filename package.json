@@ -1,0 +1,26 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "simple tic tac toe game",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slhodak/hrsf116-tic-tac-toe.git"
+  },
+  "author": "Sam Hodak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slhodak/hrsf116-tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/slhodak/hrsf116-tic-tac-toe#readme",
+  "dependencies": {
+    "6.9": "^1.0.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
