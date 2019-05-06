@@ -70,7 +70,6 @@ const Game = {
         }
       }
     }
-    console.log('found empty space: ', emptySpaceFound);
     return !emptySpaceFound;
   },
   checkForRowVictory: function() {
@@ -163,7 +162,7 @@ const Views = {
     winner.style.border = '1px solid black';
     let now = new Date();
     time.innerText = `${now.getMonth()}/${now.getDate()}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
-    winner.innerText = Game.getLastWinner();
+    winner.innerText = Game.record[Game.record.length - 1];
     row.append(time);
     row.append(winner);
     Views.getRecordTable().append(row);
