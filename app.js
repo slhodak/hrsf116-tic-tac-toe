@@ -27,7 +27,7 @@ const Game = {
     } else {
       Game.lastMove = [tileLocation[0], tileLocation[1]];
       Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
-      Game.checkForEndConditions((none, result) => {
+      Game.checkForEndConditions((result) => {
         Views.refreshBoard();
         if (result) {
           Views.displayResultMessage(result);
@@ -40,12 +40,12 @@ const Game = {
   checkForEndConditions: function(callback) {
     // check board for end conditions
     if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
-      callback(null, Game.turn);
+      callback(Game.turn);
       return;
     }
     
     // if no end conditions
-    callback(true);
+    callback();
   },
   checkForRowVictory: function() {
     for (var i = 0; i < Game.board.length; i++) {
