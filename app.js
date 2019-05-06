@@ -8,7 +8,7 @@ Array.from(tiles).forEach(element => {
 
 // Models
 //    check for game end conditions
-let Game = {
+const Game = {
   board : [
       [null, null, null],
       [null, null, null],
@@ -28,12 +28,12 @@ let Game = {
       Game.lastMove = [tileLocation[0], tileLocation[1]];
       Game.board[tileLocation[0]][tileLocation[1]] = Game.turn;
       Game.checkForEndConditions((none, result) => {
-        Game.switchTurn();
         Views.refreshBoard();
-        if (none) {
+        if (result) {
+          Views.displayResultMessage(result);
           return;
         }
-        Views.displayResultMessage(result);
+        Game.switchTurn();
       });
     }
   },
@@ -91,7 +91,8 @@ const Views = {
     } else {
       message = 'It\'s a draw.';
     }
-    // render message to the DOM
+    let messageDisplay = document.getElementById('resultMessage');
+    messageDisplay.innerText = message;
   }
 }
 
