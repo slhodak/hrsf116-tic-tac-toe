@@ -16,13 +16,14 @@ showFormButton.addEventListener('click', (e) => {
 });
 let playerXForm = document.getElementById('setPlayerX');
 playerXForm.addEventListener('submit', (e) => {
-  Game.setPlayers(e.target[0].value, e.target[1].value);
+  Game.registerPlayers(e.target[0].value, e.target[1].value);
   playerXForm.hidden = true;
 });
 
 // Models
 const Game = {
   players: {
+    registered: false,
     X: '',
     O: ''
   },
@@ -35,9 +36,11 @@ const Game = {
     ],
   turn: 'X',
   lastMove: [],
-  setPlayers: function(playerX, playerO) {
+  registerPlayers: function(playerX, playerO) {
     Game.players.X = playerX;
     Game.players.O = playerO;
+    Game.players.registered = true;
+    Views.displayCurrentTurn();
   },
   switchTurn: function() {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
@@ -141,7 +144,11 @@ const Game = {
 const Views = {
   displayCurrentTurn: function() {
     const turnDisplay = document.getElementById('currentTurn');
-    turnDisplay.innerText = Game.turn;
+    if (Game.players.registered) {
+      turnDisplay.innerText = `${Game.players[Game.turn]}, playing \'${Game.turn}\'` ;
+    } else {
+      turnDisplay.innerText = Game.turn;
+    }
   },
   clearBoard: function() {
     Array.from(document.getElementsByClassName('tile')).forEach(tile => {

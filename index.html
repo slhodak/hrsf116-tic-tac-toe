@@ -9,9 +9,11 @@
 <body>
   <h1>Tic - Tac - Toe</h1>
   <!-- turns flipper -->
-  <button id="enterPlayers">Register Players</button>
-  <form action="#" id="registerPlayers" hidden="true">
+  <button id="showPlayersForm" style="margin-bottom: 10px">Register Players</button>
+  <form action="#" id="setPlayerX" hidden="true">
     <label>Who is X?</label>
+    <input type="text" placeholder="name" style="margin-bottom: 10px"></input><br>
+    <label>Who is O?</label>
     <input type="text" placeholder="name"></input>
     <input type="submit"></input>
   </form>
