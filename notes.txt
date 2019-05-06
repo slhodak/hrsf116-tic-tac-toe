@@ -1,0 +1,36 @@
+### Tic Tac Toe ###
+
+First move always starts with player X
+App detects a win or tie and displays the appropriate message
+A button resets th egame for a new round
+
+Single-page app
+- no user actions cause whole page reload
+
+Native DOM
+- no react, no jquery etc
+
+MVC
+- manage app state
+- divide responsibilities by area of app.js
+
+Hint names:
+- Basic file setup
+- Initial board setup
+- Event listener not working
+- Alternate between X and O
+- Implement the rules of tic tac toe
+- Resetting the game
+- Separation of concerns
+
+
+Choices
+- Dynamically loaded page elements or hard-coded ones
+- Storage of game state
+  - 2d array
+- UI
+  - turn flipper
+    - div with text saying "turn: x" or "o"
+  - board
+  - display message
+- Event listeners vs controllers
