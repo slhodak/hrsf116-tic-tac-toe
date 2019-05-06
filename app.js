@@ -59,12 +59,13 @@ let Game = {
 // Views
 const Views = {
   refreshBoard: function() {
+
   },
   displayResultMessage: function(result) {
     let message = '';
-    if (result === 'o') {
+    if (result === 'O') {
       message = 'O wins!';
-    } else if (result === 'x') {
+    } else if (result === 'X') {
       message = 'X wins!';
     } else {
       message = 'It\'s a draw.';
