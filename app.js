@@ -12,6 +12,7 @@ resetButton.addEventListener('click', (e) => {
 
 // Models
 const Game = {
+  record: [],
   over: false,
   board : [
       [null, null, null],
@@ -38,6 +39,9 @@ const Game = {
         if (result) {
           Views.displayResultMessage(result);
           Game.over = true;
+          Game.record.push(Game.turn);
+          //  add record row
+          Views.addRecordRow();
           return;
         }
         Game.switchTurn();
@@ -86,7 +90,7 @@ const Game = {
         row[i] = null;
       }
     });
-    Game.turn = 'X';
+    Game.turn = Game.record[Game.record.length - 1];
     Game.over = false;
     Views.displayCurrentTurn();
     Views.clearBoard();
@@ -120,6 +124,23 @@ const Views = {
     }
     let messageDisplay = document.getElementById('resultMessage');
     messageDisplay.innerText = message;
+  },
+  getRecordTable: function() {
+    return document.getElementById('record');
+  },
+  addRecordRow: function() {
+    let row = document.createElement('tr');
+    row.style.border = '1px solid black';
+    let time = document.createElement('td');
+    time.style.border = '1px solid black';
+    let winner = document.createElement('td');
+    winner.style.border = '1px solid black';
+    let now = new Date();
+    time.innerText = `${now.getMonth()}/${now.getDate()}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+    winner.innerText = Game.turn;
+    row.append(time);
+    row.append(winner);
+    Views.getRecordTable().append(row);
   }
 }
 
