@@ -12,7 +12,6 @@ resetButton.addEventListener('click', (e) => {
 
 
 // Models
-//    check for game end conditions
 const Game = {
   board : [
       [null, null, null],
@@ -25,7 +24,6 @@ const Game = {
     Game.turn === 'O' ? Game.turn = 'X' : Game.turn = 'O';
   },
   updateBoard: function(tileLocation) {
-    //  change value in board model depending on span clicked
     if (Game.board[tileLocation[0]][tileLocation[1]] !== null) {
       console.log('no continue', Game.turn);
       return;
@@ -43,12 +41,10 @@ const Game = {
     }
   },
   checkForEndConditions: function(callback) {
-    // check board for end conditions
     if (Game.checkForRowVictory() || Game.checkForColumnVictory() || Game.checkForDiagonalVictory()) {
       callback(Game.turn);
       return;
     }
-    // if no end conditions
     callback();
   },
   checkForRowVictory: function() {
