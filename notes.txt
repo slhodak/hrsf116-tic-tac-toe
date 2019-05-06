@@ -28,6 +28,9 @@ Choices
 - Dynamically loaded page elements or hard-coded ones
 - Storage of game state
   - 2d array
+  - update game state
+- Checking for end conditions
+
 - UI
   - turn flipper
     - div with text saying "turn: x" or "o"
