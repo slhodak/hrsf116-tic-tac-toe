@@ -178,11 +178,8 @@ const Views = {
   },
   addRecordRow: function() {
     let row = document.createElement('tr');
-    row.style.border = '1px solid black';
     let time = document.createElement('td');
-    time.style.border = '1px solid black';
     let winner = document.createElement('td');
-    winner.style.border = '1px solid black';
     let now = new Date();
     time.innerText = `${now.getMonth()}/${now.getDate()}/${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
     winner.innerText = Game.players.registered ? `${Game.players[Game.turn]}(${Game.turn})` : Game.record[Game.record.length - 1];
