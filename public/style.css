@@ -1,5 +1,6 @@
 html {
   background-color: aquamarine;
+  text-align: center;
 }
 
 body {
@@ -10,14 +11,37 @@ body {
     "topLeft  topLeft  title  title  topRight  topRight"
     "regPlay  regPlay  turns  turns  record    record "
     "regPlay  regPlay  board  board  record    record "
-    "reset    reset    board  board  record    record "
+    "midLeft  midLeft    board  board  record    record "
     "botLeft  botLeft  result  result  botRight  botRight"
-    "lFooter  lFooter  mFoot  mFoot  rFooter  rFooter"
+    "lFooter  lFooter  reset reset rFooter  rFooter"
   ;
+}
+
+button {
+  border-radius: 8px;
+}
+
+#titleHeader {
+  grid-area: title;
 }
 
 #playersForm {
   grid-area: regPlay;
+  display: grid;
+  grid-template-rows: repeat(3, 50px);
+  grid-template-columns: repeat(4, 100px);
+}
+#playersForm button {
+  grid-area: 1 / 2 / 2 / 4;
+  height: 40px;
+  width: 80%;
+  justify-self: center;
+}
+#setPlayers {
+  grid-area: 2 / 2 / 3 / 4;
+}
+#setPlayers {
+  margin: 10px;
 }
 
 #turn {
@@ -26,6 +50,7 @@ body {
 
 #board {
   grid-area: board;
+  font-size: 3em;
 }
 
 #record {
@@ -35,7 +60,6 @@ body {
 #resultMessage {
   grid-area: result;
 }
-
 
 #reset {
   grid-area: reset;

@@ -11,13 +11,13 @@ resetButton.addEventListener('click', (e) => {
 });
 let showFormButton = document.getElementById('showPlayersForm');
 showFormButton.addEventListener('click', (e) => {
-  let form = document.getElementById('setPlayerX');
+  let form = document.getElementById('setPlayers');
   form.hidden = !form.hidden;
 });
-let playerXForm = document.getElementById('setPlayerX');
-playerXForm.addEventListener('submit', (e) => {
+let playersForm = document.getElementById('setPlayers');
+playersForm.addEventListener('submit', (e) => {
   Game.registerPlayers(e.target[0].value, e.target[1].value);
-  playerXForm.hidden = true;
+  playersForm.hidden = true;
 });
 
 // Models
