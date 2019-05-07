@@ -201,11 +201,20 @@ const HelperFunctions = {
   parseTileCoordinates: function(tileNode) {
     let tileCoordinates = tileNode.id.split('_')[1].split('');
     return tileCoordinates.map(coord => parseInt(coord));
+  },
+  rotateMatrix: function(matrix) {
+    //  0, 1, 2, 1
+    //  0, 0, 2, 2
+å
+  },
+  spiralCoordinate: function(coordinate) {
+    // 0, 1, 2, 1
+    let newX = (coordinate[0] + 1) > 2 ? (coordinate[0] + 1) % 2 : coordinate[0] + 1;
+
   }
 }
 
 Views.displayCurrentTurn();
-
 
 //  Test Suite
 const tests = {
