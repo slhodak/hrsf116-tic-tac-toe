@@ -1,9 +1,8 @@
 // Event Listeners
-let tiles = document.getElementsByClassName('tile');
-Array.from(tiles).forEach(element => {
-  element.addEventListener('click', (e) => {
-    Controllers.handleTileClick(e.target);
-  });
+let board = document.getElementById('board');
+board.addEventListener('click', (e) => {
+  console.log(e.target);
+  Controllers.handleTileClick(e.target);
 });
 let resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', (e) => {
